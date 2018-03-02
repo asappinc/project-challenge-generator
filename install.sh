@@ -1,8 +1,10 @@
-#!/bin/bash
+#!/bin/bash -e
+
+BASEURL="https://raw.githubusercontent.com/ASAPPinc/project-challenge-generator/master/scripts"
 
 # Check dependencies
 if [ -N `which node` ]; then
-    echo "Please install node.js - https://nodejs.org/en/download/"
+    echo "Please install node.js - https://nodejs.org/en/download"
     exit 1
 fi
 
@@ -169,21 +171,15 @@ author=$answer
 
 printf "${NC}Alright, give us a moment while we set up your project challenge...\n"
 
-# if [ $projectType === 'React' ]; then
-#     ( exec ./scripts/react.sh $projectName $author $projectType ${addons[@]} $serverType)
-# elif [ $projectType === 'Angular' ]; then
-#     ( exec ./scripts/angular.sh $projectName $author $projectType)
-# elif [ $projectType === 'Ember' ]; then
-#     ( exec ./scripts/ember.sh $projectName $author $projectType)
-# else
-#     ( exec ./scripts/generic.sh $projectName $author $projectType)
-# fi
-
-echo $projectName
-echo $author
-echo $projecType
-echo ${addons[@]}
-echo $serverType
+if [ $projectType === 'React' ]; then
+    sh -c "$(curl -fsSL ${BASEURL}/react.sh \"$projectName\" \"$author\" \"$projectType\" \"${addons[@]} \"$serverType\")"
+elif [ $projectType === 'Angular' ]; then
+    sh -c "$(curl -fsSL ${BASEURL}/angular.sh \"$projectName\" \"$author\" \"$projectType\")"
+elif [ $projectType === 'Ember' ]; then
+    sh -c "$(curl -fsSL ${BASEURL}/ember.sh \"$projectName\" \"$author\" \"$projectType\")"
+else
+    sh -c "$(curl -fsSL ${BASEURL}/generic.sh \"$projectName\" \"$author\" \"$projectType\")"
+fi
 
 
 printf "${GN}You're all set to start the challenge.\n\n"

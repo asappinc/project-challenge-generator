@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 CWD=`cd $(dirname $0); pwd`
 
 mkdir asapp-project-challenge

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 CWD=`cd $(dirname $0); pwd`
 
 [ -z `which ember` ] && npm install -g ember-cli

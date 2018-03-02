@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 CWD=`cd $(dirname $0); pwd`
 
 [ -z `which ng` ] && npm install -g @angular/cli
