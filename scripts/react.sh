@@ -1,11 +1,9 @@
 #!/bin/bash -e
 CWD=`cd $(dirname $0); pwd`
 
-NAME="$1"
-AUTHOR="$2"
-STATELIB="$3"
-STYLELIB="$4"
-SERVER="$5"
+STATELIB="$1"
+STYLELIB="$2"
+SERVER="$3"
 
 [ -z `which create-react-app` ] && npm install -g create-react-app
 create-react-app asapp-project-challenge --use-npm

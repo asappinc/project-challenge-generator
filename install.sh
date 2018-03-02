@@ -1,6 +1,7 @@
 #!/bin/bash -e -x
 
 BASEURL="https://raw.githubusercontent.com/ASAPPinc/project-challenge-generator/master/scripts"
+DEST="asapp-project-challenge"
 
 # Check dependencies
 if [ -N `which node` ]; then
@@ -138,18 +139,18 @@ if [ $answer == "Yes" ]; then
         printf "${NC}Okay, we'll let you set that one up.\n          \n"
     fi
 
-    promptYN "Do you want to build your own server? This is completely optional"
-    if [ $answer == "Yes" ]; then
-        list=("Node.JS" "Python" "Other")
-        promptList "What server language are you most familiar with?" "${list[@]}"
+    # promptYN "Do you want to build your own server? This is completely optional"
+    # if [ $answer == "Yes" ]; then
+    #     list=("Node.JS" "Python" "Other")
+    #     promptList "What server language are you most familiar with?" "${list[@]}"
 
-        if [ ! $answer == "Other" ]; then
-            printf "${NC}Great, we'll include ${answer} as the backend\n          \n"
-            serverType=$answer
-        else
-            printf "${NC}Okay, you'll let you have to that up.\n          \n"
-        fi
-    fi
+    #     if [ ! $answer == "Other" ]; then
+    #         printf "${NC}Great, we'll include ${answer} as the backend\n          \n"
+    #         serverType=$answer
+    #     else
+    #         printf "${NC}Okay, you'll let you have to that up.\n          \n"
+    #     fi
+    # fi
 
 else
     list=("Angular" "Ember" "Other")
@@ -172,16 +173,17 @@ author=$answer
 printf "${NC}Alright, give us a moment while we set up your ${projectType} project challenge...\n"
 
 if [ "$projectType" == "React" ]; then
-    sh -c "$(curl -fsSL ${BASEURL}/react.sh) \"$projectName\" \"$author\" \"$projectType\" \"${addons[@]} \"$serverType\""
+    sh -c "$(curl -fsSL ${BASEURL}/react.sh) \"${addons[@]}\" \"$serverType\""
 elif [ "$projectType" == "Angular" ]; then
-    sh -c "$(curl -fsSL ${BASEURL}/angular.sh) \"$projectName\" \"$author\" \"$projectType\""
+    sh -c "$(curl -fsSL ${BASEURL}/angular.sh)"
 elif [ "$projectType" == "Ember" ]; then
-    sh -c "$(curl -fsSL ${BASEURL}/ember.sh) \"$projectName\" \"$author\" \"$projectType\""
+    sh -c "$(curl -fsSL ${BASEURL}/ember.sh)"
 else
-    sh -c "$(curl -fsSL ${BASEURL}/generic.sh) \"$projectName\" \"$author\" \"$projectType\""
+    sh -c "$(curl -fsSL ${BASEURL}/generic.sh)"
 fi
 
-node -e "$(curl -fsSL ${BASEURL}/package.js) \"$*\""
+cd $DEST
+node -e "$(curl -fsSL ${BASEURL}/package.js)" \"$projectName\" \"$author\" \"$projectType\" \"${addons[@]} \"$serverType\"
 
 printf "${GN}You're all set to start the challenge.\n\n"
 printf "${YL}To run the project type ${PK}'npm start'${NC}\n"
