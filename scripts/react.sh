@@ -11,7 +11,6 @@ SERVER="$5"
 create-react-app asapp-project-challenge --use-npm
 cd asapp-project-challenge
 git init
-node $CWD/package.js "$*"
 
 if [ $STATELIB == "Redux" ]; then
     npm install react-redux redux --save

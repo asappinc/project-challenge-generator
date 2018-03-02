@@ -5,4 +5,3 @@ mkdir asapp-project-challenge
 cd asapp-project-challenge
 npm init -y
 git init
-node $CWD/package.js "$*"

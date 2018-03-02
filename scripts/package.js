@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
-var pk = require(path.join(process.cwd(), 'package.json'));
+var packagePath = path.join(process.cwd(), 'package.json');
+var pk = require(packagePath);
 
 var args = Array.prototype.slice.call(process.argv, 2)
 var name = args.shift().toLowerCase().replace(/\s/g, '-');
@@ -12,4 +13,4 @@ pk.scripts.package = 'tar --exclude asapp-project-challenge.tgz --exclude node_m
 pk.author = author;
 pk.tags = tags;
 
-fs.writeFileSync('./package.json', JSON.stringify(pk, null, 4), { encoding: 'utf-8' });
+fs.writeFileSync(packagePath, JSON.stringify(pk, null, 4), { encoding: 'utf-8' });

@@ -5,4 +5,3 @@ CWD=`cd $(dirname $0); pwd`
 ng new asapp-project-challenge
 cd asapp-project-challenge
 git init
-node $CWD/package.js "$*"

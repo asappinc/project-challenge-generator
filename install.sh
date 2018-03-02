@@ -94,7 +94,7 @@ function promptList() {
 
     printf "\033[${#LIST[@]}A"
     for IDX in ${!LIST[@]}; do
-        printf "   ${HID}${LIST[$IDX]}     \n"
+        printf "                                 \n"
     done
     printf "${CURON}\033[$((${#LIST[@]}+1))A"
     printf "${GR}${PROMPT} ${BL}${LIST[$SELECTED]}       \n"
@@ -171,16 +171,17 @@ author=$answer
 
 printf "${NC}Alright, give us a moment while we set up your project challenge...\n"
 
-if [ $projectType == 'React' ]; then
-    sh -c "$(curl -fsSL ${BASEURL}/react.sh \"$projectName\" \"$author\" \"$projectType\" \"${addons[@]} \"$serverType\")"
-elif [ $projectType == 'Angular' ]; then
-    sh -c "$(curl -fsSL ${BASEURL}/angular.sh \"$projectName\" \"$author\" \"$projectType\")"
-elif [ $projectType == 'Ember' ]; then
-    sh -c "$(curl -fsSL ${BASEURL}/ember.sh \"$projectName\" \"$author\" \"$projectType\")"
+if [[ $projectType == "React" ]]; then
+    sh -c "$(curl -fsSL ${BASEURL}/react.sh) \"$projectName\" \"$author\" \"$projectType\" \"${addons[@]} \"$serverType\""
+elif [[ $projectType == "Angular" ]]; then
+    sh -c "$(curl -fsSL ${BASEURL}/angular.sh) \"$projectName\" \"$author\" \"$projectType\""
+elif [[ $projectType == "Ember" ]]; then
+    sh -c "$(curl -fsSL ${BASEURL}/ember.sh) \"$projectName\" \"$author\" \"$projectType\""
 else
-    sh -c "$(curl -fsSL ${BASEURL}/generic.sh \"$projectName\" \"$author\" \"$projectType\")"
+    sh -c "$(curl -fsSL ${BASEURL}/generic.sh) \"$projectName\" \"$author\" \"$projectType\""
 fi
 
+node -e "$(curl -fsSL ${BASEURL}/package.js) \"$*\""
 
 printf "${GN}You're all set to start the challenge.\n\n"
 printf "${YL}To run the project type ${PK}\`npm start\`${NC}\n"
