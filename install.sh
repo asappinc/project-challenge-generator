@@ -63,7 +63,7 @@ function promptYN() {
 }
 
 function promptList() {
-    local ARGS=$!
+    local ARGS=$*
     local PROMPT=$1
     local LIST=(${ARGS:${#PROMPT}})
     local SELECTED=0
@@ -104,8 +104,8 @@ function promptList() {
 
 trap "stty echo; printf '${CURON}${NC}\n'; exit" 2
 
-projectName="Untitled"
-author=""
+projectName='Untitled'
+author=''
 projecType='Generic'
 addons=()
 serverType=''
