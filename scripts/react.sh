@@ -12,10 +12,10 @@ create-react-app asapp-project-challenge --use-npm
 cd asapp-project-challenge
 git init
 
-if [ $STATELIB == "Redux" ]; then
+if [ "$STATELIB" == "Redux" ]; then
     npm install react-redux redux --save
     cp -R $CWD/files/react-redux/* .
-elif [ $STATELIB == "MobX" ]; then
+elif [ "$STATELIB" == "MobX" ]; then
     npm install mobx-react mobx --save
     cp -R $CWD/files/react-mobx/* .
 fi
@@ -35,7 +35,7 @@ if [ "$STYLELIB" == "SASS" ]; then
     fs.writeFileSync('./package.json', JSON.stringify(pk, null, 4), { encoding: 'utf-8' });"
     mv src/App.css src/App.scss
 
-elif [ $STYLELIB == "LESS" ];then
+elif [ "$STYLELIB" == "LESS" ];then
     npm install --save node-less-chokidar npm-run-all
 
     node -e "\

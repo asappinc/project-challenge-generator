@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -e -x
 
 BASEURL="https://raw.githubusercontent.com/ASAPPinc/project-challenge-generator/master/scripts"
 
@@ -104,11 +104,11 @@ function promptList() {
 
 trap "stty echo; printf '${CURON}${NC}\n'; exit" 2
 
-projectName='Untitled'
-author=''
-projecType='Generic'
+projectName="Untitled"
+author=""
+projectType="Generic"
 addons=()
-serverType=''
+serverType=""
 
 printf "${WH}Welcome to the ASAPP Front-End Challenge\n\n"
 printf "${NC}Let's get you setup for the challenge.\n\n"
@@ -117,7 +117,7 @@ printf "${YL}To begin, please answer the following questions:\n\n"
 promptYN "Do you have any experience with React?"
 
 if [ $answer == "Yes" ]; then
-    projecType='React'
+    projectType="React"
     printf "${NC}Great, let's get you setup with a React base project then.\n\n"
     list=("Redux" "MobX" "Other")
     promptList "Do you have experience with Redux, MobX or any other state management library?" "${list[@]}"
@@ -155,7 +155,7 @@ else
     list=("Angular" "Ember" "Other")
     promptList "That's okay, what JavaScript framework/library are familiar with?" "${list[@]}"
     if [ ! $answer == "Other" ]; then
-        projecType=$answer
+        projectType="$answer"
         printf "${GR}Okay, we can get you setup with an ${answer} base project\n         \n"
     else
         printf "${GR}We can setup you up with a generic NPM project, but you'll need to add your own components\n       \n"
@@ -169,13 +169,13 @@ prompt "What's your name?"
 author=$answer
 
 
-printf "${NC}Alright, give us a moment while we set up your project challenge...\n"
+printf "${NC}Alright, give us a moment while we set up your ${projectType} project challenge...\n"
 
-if [[ $projectType == "React" ]]; then
+if [ "$projectType" == "React" ]; then
     sh -c "$(curl -fsSL ${BASEURL}/react.sh) \"$projectName\" \"$author\" \"$projectType\" \"${addons[@]} \"$serverType\""
-elif [[ $projectType == "Angular" ]]; then
+elif [ "$projectType" == "Angular" ]; then
     sh -c "$(curl -fsSL ${BASEURL}/angular.sh) \"$projectName\" \"$author\" \"$projectType\""
-elif [[ $projectType == "Ember" ]]; then
+elif [ "$projectType" == "Ember" ]; then
     sh -c "$(curl -fsSL ${BASEURL}/ember.sh) \"$projectName\" \"$author\" \"$projectType\""
 else
     sh -c "$(curl -fsSL ${BASEURL}/generic.sh) \"$projectName\" \"$author\" \"$projectType\""
@@ -184,7 +184,7 @@ fi
 node -e "$(curl -fsSL ${BASEURL}/package.js) \"$*\""
 
 printf "${GN}You're all set to start the challenge.\n\n"
-printf "${YL}To run the project type ${PK}\`npm start\`${NC}\n"
-printf "${YL}When you're finished, run ${PK}\`npm run package\`${YL} to package your project to send to us.\n\n"
+printf "${YL}To run the project type ${PK}'npm start'${NC}\n"
+printf "${YL}When you're finished, run ${PK}'npm run package'${YL} to package your project to send to us.\n\n"
 printf "Don't forget to update your README.md\n\n"
 printf "Good Luck!\n\n"
