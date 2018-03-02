@@ -1,4 +1,4 @@
-#!/bin/bash -e -x
+#!/bin/bash -e
 
 BASEURL="https://raw.githubusercontent.com/ASAPPinc/project-challenge-generator/master/scripts"
 DEST="asapp-project-challenge"
