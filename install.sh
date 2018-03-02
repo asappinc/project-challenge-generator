@@ -129,7 +129,7 @@ if [ $answer == "Yes" ]; then
     else
         printf "${NC}Nice, we'll let you set that up.\n          \n"
     fi
-    list=("SASS" "LESS" "Pure CSS" "Other")
+    list=("SASS" "LESS" "CSS" "Other")
     promptList "How about any experience with a CSS framework?" "${list[@]}"
 
     if [ ! $answer == "Other" ]; then
